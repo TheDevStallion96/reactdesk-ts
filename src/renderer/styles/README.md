@@ -11,6 +11,7 @@ This directory contains all CSS stylesheets for the application.
 ## Organization
 
 Styles are organized by purpose:
+
 - Global/base styles in `global.css`
 - Component styles in `components.css`
 - Utility classes can be added as needed
@@ -20,8 +21,8 @@ Styles are organized by purpose:
 Import styles in `main.tsx`:
 
 ```typescript
-import './styles/global.css';
-import './styles/components.css';
+import "./styles/global.css";
+import "./styles/components.css";
 ```
 
 ## Styling Approach

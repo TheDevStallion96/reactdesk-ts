@@ -5,16 +5,17 @@ This directory contains application-wide constants shared between main and rende
 ## Organization
 
 Constants are organized by category:
+
 - **app.ts** - Application-level constants (name, version, window config)
 - **ipc.ts** - IPC channel names and types
 
 ## Usage
 
 ```typescript
-import { APP_NAME, IPC_CHANNELS } from '@/shared/constants';
+import { APP_NAME, IPC_CHANNELS } from "@/shared/constants";
 
 console.log(APP_NAME);
-ipcMain.handle(IPC_CHANNELS.APP_PING, () => 'pong');
+ipcMain.handle(IPC_CHANNELS.APP_PING, () => "pong");
 ```
 
 ## Benefits

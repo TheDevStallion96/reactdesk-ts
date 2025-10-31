@@ -5,6 +5,7 @@ This directory contains top-level page components that represent different views
 ## Organization
 
 Pages are:
+
 - High-level components that compose smaller components
 - Represent distinct views or routes
 - May manage page-level state
@@ -17,9 +18,9 @@ Pages are:
 ## Usage
 
 ```typescript
-import { HomePage } from '@/renderer/pages';
+import { HomePage } from "@/renderer/pages";
 
-<HomePage />
+<HomePage />;
 ```
 
 ## Adding New Pages

@@ -5,6 +5,7 @@ This directory contains TypeScript type definitions shared between main and rend
 ## Organization
 
 Types are organized by domain:
+
 - **app.d.ts** - Application types (User, Config, State)
 - **electron.d.ts** - Electron API type definitions
 - **ipc.d.ts** - IPC message types and payloads
@@ -12,11 +13,11 @@ Types are organized by domain:
 ## Usage
 
 ```typescript
-import type { IPCResponse, User, ElectronAPI } from '@/shared/types';
+import type { IPCResponse, User, ElectronAPI } from "@/shared/types";
 
 const response: IPCResponse<User> = {
   success: true,
-  data: { id: '1', name: 'John', email: 'john@example.com' }
+  data: { id: "1", name: "John", email: "john@example.com" },
 };
 ```
 

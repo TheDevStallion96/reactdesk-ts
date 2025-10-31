@@ -7,7 +7,6 @@ This directory contains IPC (Inter-Process Communication) handlers and utilities
 - **handlers.ts** - IPC handler registration and implementation
   - Defines all IPC handlers that respond to renderer requests
   - Handles app-level operations, data processing, etc.
-  
 - **events.ts** - Event emitters for main-to-renderer communication
   - Utilities for sending messages from main to renderer processes
   - Broadcasting capabilities for multiple windows
@@ -17,7 +16,7 @@ This directory contains IPC (Inter-Process Communication) handlers and utilities
 Import and register handlers in `main.ts`:
 
 ```typescript
-import { registerIPCHandlers } from './ipc/handlers';
+import { registerIPCHandlers } from "./ipc/handlers";
 
 app.whenReady().then(() => {
   registerIPCHandlers();

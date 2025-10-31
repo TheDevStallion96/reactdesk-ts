@@ -5,6 +5,7 @@ This directory contains utility functions and helpers for the renderer process.
 ## Organization
 
 Utilities should be:
+
 - Pure functions when possible
 - Well-typed with TypeScript
 - Properly documented
@@ -18,7 +19,7 @@ Utilities should be:
 ## Usage
 
 ```typescript
-import { formatDate, formatFileSize } from '@/renderer/utils';
+import { formatDate, formatFileSize } from "@/renderer/utils";
 
 const dateStr = formatDate(new Date());
 const sizeStr = formatFileSize(1024000);

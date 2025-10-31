@@ -5,6 +5,7 @@ This directory contains all reusable React components for the application.
 ## Organization
 
 Components should be:
+
 - Self-contained and reusable
 - Well-documented with JSDoc comments
 - Type-safe using TypeScript interfaces
@@ -28,9 +29,9 @@ export const Component: React.FC<ComponentProps> = (props) => {
 ## Usage
 
 ```typescript
-import { Button, Card } from '@/renderer/components';
+import { Button, Card } from "@/renderer/components";
 
-<Button variant="primary">Click me</Button>
+<Button variant="primary">Click me</Button>;
 ```
 
 ## Current Components

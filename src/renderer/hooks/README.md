@@ -5,7 +5,8 @@ This directory contains custom React hooks for shared functionality across compo
 ## Organization
 
 Hooks should:
-- Follow React hooks naming convention (use*)
+
+- Follow React hooks naming convention (use\*)
 - Be properly documented
 - Handle cleanup in useEffect when needed
 - Be exported via `index.ts`
@@ -18,12 +19,12 @@ Hooks should:
 ## Usage
 
 ```typescript
-import { useIPC, useAppVersion } from '@/renderer/hooks';
+import { useIPC, useAppVersion } from "@/renderer/hooks";
 
 function MyComponent() {
   const { invoke } = useIPC();
   const version = useAppVersion();
-  
+
   // Use the hooks...
 }
 ```

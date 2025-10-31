@@ -5,6 +5,7 @@ This document describes the modular folder structure of the ReactDesk TypeScript
 ## Overview
 
 The project is organized into three main sections:
+
 - **main/** - Electron main process code
 - **renderer/** - React application code
 - **shared/** - Code and types shared between processes
@@ -76,83 +77,101 @@ src/
 ## Design Principles
 
 ### 1. **Separation of Concerns**
+
 Each directory has a specific purpose and contains related code only.
 
 ### 2. **Modular Organization**
+
 Code is organized by feature/function, making it easy to find and maintain.
 
 ### 3. **Clear Boundaries**
+
 - `main/` contains Electron main process code
 - `renderer/` contains React UI code
 - `shared/` contains code used by both processes
 
 ### 4. **Index Exports**
+
 Each directory with multiple files has an `index.ts` that exports everything, allowing clean imports:
+
 ```typescript
-import { Button, Card } from '@/renderer/components';
-import { useIPC, useAppVersion } from '@/renderer/hooks';
+import { Button, Card } from "@/renderer/components";
+import { useIPC, useAppVersion } from "@/renderer/hooks";
 ```
 
 ### 5. **Documentation**
+
 Every major directory includes a README.md explaining its purpose and usage.
 
 ### 6. **Type Safety**
+
 TypeScript types are centralized in `shared/types/` and shared across processes.
 
 ### 7. **Constants Management**
+
 Magic strings are replaced with constants from `shared/constants/`.
 
 ## Import Patterns
 
 ### Component Imports
+
 ```typescript
-import { Button } from '@/renderer/components';
-import { HomePage } from '@/renderer/pages';
+import { Button } from "@/renderer/components";
+import { HomePage } from "@/renderer/pages";
 ```
 
 ### Hook Imports
+
 ```typescript
-import { useIPC, useAppVersion } from '@/renderer/hooks';
+import { useIPC, useAppVersion } from "@/renderer/hooks";
 ```
 
 ### Type Imports
+
 ```typescript
-import type { IPCResponse, User } from '@/shared/types';
+import type { IPCResponse, User } from "@/shared/types";
 ```
 
 ### Constant Imports
+
 ```typescript
-import { APP_NAME, IPC_CHANNELS } from '@/shared/constants';
+import { APP_NAME, IPC_CHANNELS } from "@/shared/constants";
 ```
 
 ### Utility Imports
+
 ```typescript
-import { formatDate, formatFileSize } from '@/renderer/utils';
+import { formatDate, formatFileSize } from "@/renderer/utils";
 ```
 
 ## Adding New Code
 
 ### New Component
+
 1. Create `src/renderer/components/ComponentName.tsx`
 2. Export from `src/renderer/components/index.ts`
 3. Update components README
 
 ### New Hook
+
 1. Create `src/renderer/hooks/useHookName.ts`
 2. Export from `src/renderer/hooks/index.ts`
 3. Update hooks README
 
 ### New Page
+
 1. Create `src/renderer/pages/PageName.tsx`
 2. Export from `src/renderer/pages/index.ts`
 3. Update pages README
 
 ### New Type
+
 1. Add to appropriate file in `src/shared/types/`
 2. Export from `src/shared/types/index.ts`
 3. Update types README
 
 ### New IPC Handler
+
 1. Add handler in `src/main/ipc/handlers.ts`
 2. Add channel constant in `src/shared/constants/ipc.ts`
 3. Add types in `src/shared/types/ipc.d.ts`
@@ -174,6 +193,7 @@ The original `src/shared/types.ts` is preserved for backward compatibility. New 
 ## Future Enhancements
 
 Consider adding:
+
 - `renderer/context/` - React context providers
 - `renderer/store/` - State management (Redux, Zustand, etc.)
 - `renderer/services/` - API and service layer
