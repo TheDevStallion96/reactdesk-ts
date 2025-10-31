@@ -1,0 +1,48 @@
+/**
+ * Component Styles
+ * 
+ * Styles specific to individual components and pages.
+ */
+
+/* Home Page */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+.home-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #2563eb;
+}
+
+.home-page p {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  color: #64748b;
+}
+
+.home-page .version {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin-bottom: 2rem;
+}
+
+.home-page .actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.home-page .message {
+  padding: 1rem;
+  background-color: #f1f5f9;
+  border-radius: 0.5rem;
+  color: #334155;
+  font-family: monospace;
+}

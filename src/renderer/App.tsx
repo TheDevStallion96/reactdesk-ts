@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import type { AppVersionInfo } from '../shared/types';
+import type { AppVersionInfo } from '../shared/types/index';
 
 /**
  * Main App Component
