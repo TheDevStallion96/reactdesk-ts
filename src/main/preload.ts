@@ -1,9 +1,9 @@
 /**
  * Electron Preload Script
- * 
+ *
  * This script runs in a privileged context before the renderer process loads.
  * It safely exposes limited APIs to the renderer via the contextBridge.
- * 
+ *
  * Security Principles:
  * 1. NEVER expose the entire ipcRenderer or any Node.js modules directly
  * 2. Only expose specific, validated functions using contextBridge
@@ -21,15 +21,15 @@ import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 export interface ElectronAPI {
   // System Information (read-only, safe)
   getAppVersion: () => Promise<AppVersionInfo>;
-  
+
   // IPC Communication Examples
   ping: () => Promise<string>;
   processData: (data: ProcessDataInput) => Promise<ProcessDataOutput>;
-  
+
   // File Operations (user-initiated only)
   showOpenDialog: (options?: OpenDialogOptions) => Promise<OpenDialogResult>;
   readFile: (filePath: string) => Promise<string>;
-  
+
   // Event Listeners (controlled subscription pattern)
   onNotification: (callback: (message: string) => void) => () => void;
 }
@@ -78,31 +78,31 @@ const validators = {
    * Validate number input with range constraints
    */
   isValidNumber(value: unknown, min = 0, max = Number.MAX_SAFE_INTEGER): value is number {
-    return typeof value === 'number' && 
-           !isNaN(value) && 
-           isFinite(value) &&
-           value >= min && 
-           value <= max;
+    return (
+      typeof value === 'number' && !isNaN(value) && isFinite(value) && value >= min && value <= max
+    );
   },
 
   /**
    * Validate file path format
    */
   isValidPath(value: unknown): value is string {
-    return typeof value === 'string' && 
-           value.length > 0 && 
-           value.length < 4096 && // Max path length
-           !value.includes('\0'); // No null bytes
+    return (
+      typeof value === 'string' &&
+      value.length > 0 &&
+      value.length < 4096 && // Max path length
+      !value.includes('\0')
+    ); // No null bytes
   },
 };
 
 /**
  * CRITICAL SECURITY: Expose limited API to renderer process
- * 
+ *
  * contextBridge creates a secure bridge between the isolated preload context
  * and the renderer process. This is the ONLY way renderer should access
  * Electron or Node.js functionality.
- * 
+ *
  * DO NOT expose:
  * - ipcRenderer directly
  * - require() function
@@ -153,20 +153,21 @@ contextBridge.exposeInMainWorld('electronAPI', {
   showOpenDialog: async (options?: OpenDialogOptions): Promise<OpenDialogResult> => {
     // SECURITY: Validate options structure
     const safeOptions: OpenDialogOptions = {};
-    
+
     if (options?.properties) {
       const validProperties = ['openFile', 'openDirectory', 'multiSelections'] as const;
       safeOptions.properties = options.properties.filter(
-        (prop): prop is typeof validProperties[number] => validProperties.includes(prop as any)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (prop): prop is (typeof validProperties)[number] => validProperties.includes(prop as any)
       );
     }
 
     if (options?.filters && Array.isArray(options.filters)) {
       safeOptions.filters = options.filters.filter(
-        filter => 
+        (filter) =>
           typeof filter.name === 'string' &&
           Array.isArray(filter.extensions) &&
-          filter.extensions.every(ext => typeof ext === 'string')
+          filter.extensions.every((ext) => typeof ext === 'string')
       );
     }
 
@@ -195,7 +196,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   /**
    * Subscribe to notifications from main process
    * Security: Controlled event subscription with cleanup
-   * 
+   *
    * Returns an unsubscribe function to prevent memory leaks
    */
   onNotification: (callback: (message: string) => void): (() => void) => {
@@ -223,12 +224,14 @@ contextBridge.exposeInMainWorld('electronAPI', {
  * Security: Prevent access to Node.js globals in renderer
  * Even though contextIsolation is enabled, this is defense-in-depth
  */
+/* eslint-disable no-undef, @typescript-eslint/no-explicit-any */
 // @ts-expect-error - Intentionally deleting for security
 delete (window as any).require;
 // @ts-expect-error - Intentionally deleting for security
 delete (window as any).exports;
 // @ts-expect-error - Intentionally deleting for security
 delete (window as any).module;
+/* eslint-enable no-undef, @typescript-eslint/no-explicit-any */
 
 /**
  * Development aid: Log when preload script loads

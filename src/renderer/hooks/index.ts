@@ -1,8 +1,8 @@
 /**
  * Hook Exports
- * 
+ *
  * Central export point for all custom React hooks.
- * 
+ *
  * @example
  * import { useIPC, useAppVersion } from '@/hooks';
  */

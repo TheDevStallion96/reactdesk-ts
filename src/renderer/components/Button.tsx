@@ -1,8 +1,8 @@
 /**
  * Button Component
- * 
+ *
  * A reusable button component with different variants.
- * 
+ *
  * @example
  * <Button variant="primary" onClick={handleClick}>
  *   Click me
@@ -23,7 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles = 'px-4 py-2 rounded font-medium transition-colors';
-  
+
   const variantStyles = {
     primary: 'bg-blue-600 hover:bg-blue-700 text-white',
     secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-800',
@@ -31,10 +31,7 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   return (
-    <button
-      className={`${baseStyles} ${variantStyles[variant]} ${className}`}
-      {...props}
-    >
+    <button className={`${baseStyles} ${variantStyles[variant]} ${className}`} {...props}>
       {children}
     </button>
   );

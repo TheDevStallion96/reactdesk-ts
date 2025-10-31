@@ -21,8 +21,8 @@ Styles are organized by purpose:
 Import styles in `main.tsx`:
 
 ```typescript
-import "./styles/global.css";
-import "./styles/components.css";
+import './styles/global.css';
+import './styles/components.css';
 ```
 
 ## Styling Approach

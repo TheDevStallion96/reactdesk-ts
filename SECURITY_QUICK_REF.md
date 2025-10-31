@@ -9,7 +9,7 @@ const mainWindow = new BrowserWindow({
     nodeIntegration: false, // ✅ MUST be false
     contextIsolation: true, // ✅ MUST be true
     sandbox: true, // ✅ MUST be true
-    preload: path.join(__dirname, "preload.js"),
+    preload: path.join(__dirname, 'preload.js'),
     webSecurity: true, // ✅ Keep enabled
   },
 });
@@ -19,14 +19,14 @@ const mainWindow = new BrowserWindow({
 
 ```typescript
 // src/main/preload.ts
-import { contextBridge, ipcRenderer } from "electron";
+import { contextBridge, ipcRenderer } from 'electron';
 
 // ✅ DO: Use contextBridge
-contextBridge.exposeInMainWorld("electronAPI", {
+contextBridge.exposeInMainWorld('electronAPI', {
   myFunction: (arg) => {
     // Validate input
-    if (!isValid(arg)) throw new Error("Invalid");
-    return ipcRenderer.invoke("my-channel", arg);
+    if (!isValid(arg)) throw new Error('Invalid');
+    return ipcRenderer.invoke('my-channel', arg);
   },
 });
 
@@ -38,16 +38,16 @@ contextBridge.exposeInMainWorld("electronAPI", {
 
 ```typescript
 // src/main/main.ts
-ipcMain.handle("my-channel", async (_event, data) => {
+ipcMain.handle('my-channel', async (_event, data) => {
   // 1. Validate input type
-  if (typeof data !== "object") throw new Error("Invalid");
+  if (typeof data !== 'object') throw new Error('Invalid');
 
   // 2. Validate structure
   const { field } = data;
-  if (typeof field !== "string") throw new Error("Invalid");
+  if (typeof field !== 'string') throw new Error('Invalid');
 
   // 3. Validate constraints
-  if (field.length > 1000) throw new Error("Too long");
+  if (field.length > 1000) throw new Error('Too long');
 
   // 4. Process safely
   return processData(field);
@@ -79,21 +79,21 @@ webSecurity: false,        // Disables same-origin policy
 
 ```typescript
 // Preload
-getAppVersion: () => ipcRenderer.invoke("get-version");
+getAppVersion: () => ipcRenderer.invoke('get-version');
 
 // Main
-ipcMain.handle("get-version", () => app.getVersion());
+ipcMain.handle('get-version', () => app.getVersion());
 ```
 
 ### User-Initiated Actions
 
 ```typescript
 // Preload
-selectFile: () => ipcRenderer.invoke("select-file");
+selectFile: () => ipcRenderer.invoke('select-file');
 
 // Main
-ipcMain.handle("select-file", async () => {
-  return dialog.showOpenDialog({ properties: ["openFile"] });
+ipcMain.handle('select-file', async () => {
+  return dialog.showOpenDialog({ properties: ['openFile'] });
 });
 ```
 
@@ -102,12 +102,12 @@ ipcMain.handle("select-file", async () => {
 ```typescript
 // Preload
 processData: (data) => {
-  if (!validate(data)) throw new Error("Invalid");
-  return ipcRenderer.invoke("process", data);
+  if (!validate(data)) throw new Error('Invalid');
+  return ipcRenderer.invoke('process', data);
 };
 
 // Main
-ipcMain.handle("process", async (_event, data) => {
+ipcMain.handle('process', async (_event, data) => {
   validateAgain(data); // Defense in depth
   return processSecurely(data);
 });
@@ -117,12 +117,12 @@ ipcMain.handle("process", async (_event, data) => {
 
 ```typescript
 const validators = {
-  isString: (v, max = 1000) => typeof v === "string" && v.length <= max,
+  isString: (v, max = 1000) => typeof v === 'string' && v.length <= max,
 
   isNumber: (v, min = 0, max = Number.MAX_SAFE_INTEGER) =>
-    typeof v === "number" && v >= min && v <= max && !isNaN(v),
+    typeof v === 'number' && v >= min && v <= max && !isNaN(v),
 
-  isPath: (v) => typeof v === "string" && !v.includes("..") && v.length < 4096,
+  isPath: (v) => typeof v === 'string' && !v.includes('..') && v.length < 4096,
 
   isValidJSON: (v) => {
     try {
@@ -160,8 +160,8 @@ onEvent: (callback) => {
   const safe = (_e, data) => {
     if (validate(data)) callback(data);
   };
-  ipcRenderer.on("event", safe);
-  return () => ipcRenderer.removeListener("event", safe);
+  ipcRenderer.on('event', safe);
+  return () => ipcRenderer.removeListener('event', safe);
 };
 
 // Renderer

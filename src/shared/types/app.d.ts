@@ -1,8 +1,8 @@
 /**
  * Application Type Definitions
- * 
+ *
  * Common type definitions used throughout the application.
- * 
+ *
  * @example
  * import type { User, AppConfig } from '@/shared/types/app';
  */

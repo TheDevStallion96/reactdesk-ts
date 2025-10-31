@@ -1,10 +1,10 @@
 /**
  * IPC Channel Constants
- * 
+ *
  * Defines all IPC channel names used for communication between
  * main and renderer processes. Using constants helps prevent typos
  * and makes refactoring easier.
- * 
+ *
  * @example
  * import { IPC_CHANNELS } from '@/shared/constants/ipc';
  * ipcMain.handle(IPC_CHANNELS.APP_PING, () => 'pong');
@@ -30,4 +30,4 @@ export const IPC_CHANNELS = {
   NOTIFICATION_SHOW: 'notification:show',
 } as const;
 
-export type IPCChannel = typeof IPC_CHANNELS[keyof typeof IPC_CHANNELS];
+export type IPCChannel = (typeof IPC_CHANNELS)[keyof typeof IPC_CHANNELS];

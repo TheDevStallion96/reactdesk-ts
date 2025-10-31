@@ -1,9 +1,9 @@
 /**
  * Electron Main Process Entry Point
- * 
+ *
  * This file serves as the main entry point for the Electron application.
  * It implements security best practices as recommended by the Electron team.
- * 
+ *
  * Security Principles Applied:
  * 1. Context Isolation: Prevents renderer from accessing Electron internals
  * 2. No Node Integration: Renderer cannot use Node.js APIs directly
@@ -29,7 +29,7 @@ const VITE_DEV_SERVER_URL = 'http://localhost:5173';
 
 /**
  * Creates the main application window with secure defaults
- * 
+ *
  * Security Features:
  * - nodeIntegration: false - Prevents renderer from using Node.js APIs
  * - contextIsolation: true - Isolates preload script context from renderer
@@ -46,37 +46,37 @@ function createWindow(): void {
     minHeight: 600,
     webPreferences: {
       // CRITICAL SECURITY SETTINGS
-      
+
       // Disable Node.js integration in the renderer process
       // This prevents arbitrary code execution in the renderer
       nodeIntegration: false,
-      
+
       // Enable context isolation to separate preload script from renderer
       // This creates a separate JavaScript context for the preload script
       contextIsolation: true,
-      
+
       // Specify the preload script path
       // Preload scripts run before the renderer and can safely expose APIs
       preload: path.join(__dirname, 'preload.js'),
-      
+
       // Enable sandbox mode for additional security
       // This runs the renderer process in a restricted environment
       sandbox: true,
-      
+
       // Enforce web security policies (same-origin policy, etc.)
       webSecurity: true,
-      
+
       // Prevent loading insecure content on HTTPS pages
       allowRunningInsecureContent: false,
-      
+
       // Disable the deprecated and insecure remote module
       // Note: This is deprecated in newer Electron versions
       // enableRemoteModule: false, // Uncomment if using older Electron
-      
+
       // Disable navigation via middle-click to prevent unintended navigation
       // This is handled via event listeners below for more control
     },
-    
+
     // Additional window security options
     show: false, // Don't show until ready (prevents white flash and potential exploits)
   });
@@ -96,9 +96,9 @@ function createWindow(): void {
         'Content-Security-Policy': [
           isDev
             ? "default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
-            : "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:;"
-        ]
-      }
+            : "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:;",
+        ],
+      },
     });
   });
 
@@ -108,12 +108,12 @@ function createWindow(): void {
    */
   mainWindow.webContents.on('will-navigate', (event, navigationUrl) => {
     const parsedUrl = new URL(navigationUrl);
-    
+
     // Allow navigation within dev server or app origin
     if (isDev && parsedUrl.origin === VITE_DEV_SERVER_URL) {
       return; // Allow dev server navigation
     }
-    
+
     // Block all other navigation attempts
     event.preventDefault();
     console.warn(`Blocked navigation to: ${navigationUrl}`);
@@ -163,7 +163,7 @@ function createWindow(): void {
 
 /**
  * IPC Handlers - Secure Communication Examples
- * 
+ *
  * Security Note: All IPC handlers should validate input and sanitize output
  * Never trust data from the renderer process - always validate!
  */
@@ -199,8 +199,8 @@ ipcMain.handle('get-app-version', async () => {
 ipcMain.handle('show-open-dialog', async (_event, options) => {
   // Validate options to prevent injection attacks
   const safeOptions = {
-    properties: Array.isArray(options?.properties) 
-      ? options.properties.filter((p: string) => 
+    properties: Array.isArray(options?.properties)
+      ? options.properties.filter((p: string) =>
           ['openFile', 'openDirectory', 'multiSelections'].includes(p)
         )
       : ['openFile'],
@@ -223,7 +223,7 @@ ipcMain.handle('read-file', async (_event, filePath: string) => {
   // SECURITY: Validate that the file path is safe
   // In a real app, you'd want to maintain a whitelist of allowed paths
   // or only allow paths that were returned from showOpenDialog
-  
+
   // Prevent directory traversal attacks
   if (filePath.includes('..') || !path.isAbsolute(filePath)) {
     throw new Error('Invalid file path');
@@ -283,7 +283,7 @@ ipcMain.handle('process-data', async (_event, data: unknown) => {
  * Security: Prevent eval() usage in the main process
  * This is a defense-in-depth measure
  */
-global.eval = function() {
+global.eval = function () {
   throw new Error('eval() is disabled for security reasons');
 };
 
@@ -311,7 +311,7 @@ app.whenReady().then(() => {
       // Deny all permissions by default
       // In a real app, you might allow specific permissions with user consent
       const allowedPermissions: string[] = []; // e.g., ['notifications']
-      
+
       if (allowedPermissions.includes(permission)) {
         callback(true);
       } else {

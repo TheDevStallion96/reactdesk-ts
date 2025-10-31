@@ -1,0 +1,29 @@
+# Ignore build outputs
+dist
+build
+out
+
+# Ignore dependencies
+node_modules
+
+# Ignore version control
+.git
+.svn
+.hg
+
+# Ignore package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore coverage reports
+coverage
+.nyc_output
+
+# Ignore logs
+*.log
+logs
+
+# Ignore OS files
+.DS_Store
+Thumbs.db

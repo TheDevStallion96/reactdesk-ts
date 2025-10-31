@@ -1,8 +1,8 @@
 /**
  * useAppVersion Hook
- * 
+ *
  * A hook that fetches and returns the application version from the main process.
- * 
+ *
  * @example
  * const version = useAppVersion();
  * return <div>Version: {version}</div>;

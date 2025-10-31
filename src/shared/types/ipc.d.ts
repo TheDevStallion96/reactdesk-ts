@@ -1,10 +1,10 @@
 /**
  * IPC Type Definitions
- * 
+ *
  * Type definitions for IPC message payloads and responses.
  * These types ensure type safety when communicating between
  * main and renderer processes.
- * 
+ *
  * @example
  * import type { IPCResponse, DataProcessRequest } from '@/shared/types/ipc';
  */

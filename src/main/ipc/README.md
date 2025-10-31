@@ -16,7 +16,7 @@ This directory contains IPC (Inter-Process Communication) handlers and utilities
 Import and register handlers in `main.ts`:
 
 ```typescript
-import { registerIPCHandlers } from "./ipc/handlers";
+import { registerIPCHandlers } from './ipc/handlers';
 
 app.whenReady().then(() => {
   registerIPCHandlers();

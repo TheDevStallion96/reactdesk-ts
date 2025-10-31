@@ -1,9 +1,9 @@
 /**
  * IPC Events
- * 
+ *
  * This file contains event emitters for sending messages from the main
  * process to the renderer process.
- * 
+ *
  * @example
  * // Send an event to the renderer:
  * import { sendToRenderer } from './ipc/events';

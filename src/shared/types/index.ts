@@ -1,9 +1,9 @@
 /**
  * Type Exports
- * 
+ *
  * Central export point for all type definitions.
  * Use this to import types throughout the application.
- * 
+ *
  * @example
  * import type { IPCResponse, User, ElectronAPI } from '@/shared/types';
  */

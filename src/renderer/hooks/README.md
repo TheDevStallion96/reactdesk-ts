@@ -19,7 +19,7 @@ Hooks should:
 ## Usage
 
 ```typescript
-import { useIPC, useAppVersion } from "@/renderer/hooks";
+import { useIPC, useAppVersion } from '@/renderer/hooks';
 
 function MyComponent() {
   const { invoke } = useIPC();

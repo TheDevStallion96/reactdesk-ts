@@ -12,7 +12,7 @@ This document demonstrates how the security features protect against common atta
 
 ```javascript
 // This should fail
-require("fs");
+require('fs');
 // Error: require is not defined
 
 process.exit();
@@ -31,11 +31,11 @@ process.exit();
 
 ```javascript
 // This should fail
-window.require("electron").ipcRenderer;
+window.require('electron').ipcRenderer;
 // Error: require is not defined
 
 // This should also fail
-ipcRenderer.send("malicious-message");
+ipcRenderer.send('malicious-message');
 // Error: ipcRenderer is not defined
 ```
 
@@ -51,7 +51,7 @@ ipcRenderer.send("malicious-message");
 
 ```javascript
 // This should fail
-await window.electronAPI.readFile("../../../etc/passwd");
+await window.electronAPI.readFile('../../../etc/passwd');
 // Error: Path traversal detected
 ```
 
@@ -67,7 +67,7 @@ await window.electronAPI.readFile("../../../etc/passwd");
 
 ```javascript
 // If this somehow reached main process, it would fail
-eval("malicious code");
+eval('malicious code');
 // Error: eval() is disabled for security reasons
 ```
 
@@ -83,7 +83,7 @@ eval("malicious code");
 
 ```javascript
 // This should fail
-window.location.href = "https://malicious-site.com";
+window.location.href = 'https://malicious-site.com';
 // Navigation blocked
 ```
 
@@ -99,7 +99,7 @@ window.location.href = "https://malicious-site.com";
 
 ```javascript
 // This should fail
-window.open("https://malicious-site.com");
+window.open('https://malicious-site.com');
 // Opens in system browser, not in app (if HTTPS)
 // Blocked if not HTTPS
 ```
@@ -133,7 +133,7 @@ document.body.innerHTML = '<script>alert("XSS")</script>';
 ```javascript
 // This should fail
 await window.electronAPI.processData({
-  text: "a".repeat(10000), // Too long
+  text: 'a'.repeat(10000), // Too long
   count: 1000, // Out of range
 });
 // Error: Invalid text field OR Invalid count field
@@ -158,15 +158,15 @@ console.log(pong); // ✅ Works - returns "pong"
 
 // Process valid data
 const result = await window.electronAPI.processData({
-  text: "Hello",
+  text: 'Hello',
   count: 3,
 });
 console.log(result); // ✅ Works - returns { processed: 'HelloHelloHello', timestamp: ... }
 
 // Open file with user consent
 const dialogResult = await window.electronAPI.showOpenDialog({
-  properties: ["openFile"],
-  filters: [{ name: "Text Files", extensions: ["txt"] }],
+  properties: ['openFile'],
+  filters: [{ name: 'Text Files', extensions: ['txt'] }],
 });
 // ✅ Works - shows native file dialog
 
@@ -208,14 +208,12 @@ For comprehensive security testing:
    ```
 
 2. **Manual Testing:**
-
    - Open DevTools in the app
    - Try each attack scenario above
    - Verify proper error messages
    - Check console for security warnings
 
 3. **Code Review:**
-
    - Review all IPC handlers
    - Verify input validation
    - Check for eval() usage
@@ -234,19 +232,16 @@ For comprehensive security testing:
 If a security vulnerability is discovered:
 
 1. **Assess Impact:**
-
    - What data could be accessed?
    - What operations could be performed?
    - Which versions are affected?
 
 2. **Immediate Actions:**
-
    - Create a security patch
    - Test the patch thoroughly
    - Prepare security advisory
 
 3. **Deployment:**
-
    - Release patch as soon as possible
    - Use auto-update mechanism
    - Notify users of critical update

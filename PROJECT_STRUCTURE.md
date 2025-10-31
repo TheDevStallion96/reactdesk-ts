@@ -95,8 +95,8 @@ Code is organized by feature/function, making it easy to find and maintain.
 Each directory with multiple files has an `index.ts` that exports everything, allowing clean imports:
 
 ```typescript
-import { Button, Card } from "@/renderer/components";
-import { useIPC, useAppVersion } from "@/renderer/hooks";
+import { Button, Card } from '@/renderer/components';
+import { useIPC, useAppVersion } from '@/renderer/hooks';
 ```
 
 ### 5. **Documentation**
@@ -116,32 +116,32 @@ Magic strings are replaced with constants from `shared/constants/`.
 ### Component Imports
 
 ```typescript
-import { Button } from "@/renderer/components";
-import { HomePage } from "@/renderer/pages";
+import { Button } from '@/renderer/components';
+import { HomePage } from '@/renderer/pages';
 ```
 
 ### Hook Imports
 
 ```typescript
-import { useIPC, useAppVersion } from "@/renderer/hooks";
+import { useIPC, useAppVersion } from '@/renderer/hooks';
 ```
 
 ### Type Imports
 
 ```typescript
-import type { IPCResponse, User } from "@/shared/types";
+import type { IPCResponse, User } from '@/shared/types';
 ```
 
 ### Constant Imports
 
 ```typescript
-import { APP_NAME, IPC_CHANNELS } from "@/shared/constants";
+import { APP_NAME, IPC_CHANNELS } from '@/shared/constants';
 ```
 
 ### Utility Imports
 
 ```typescript
-import { formatDate, formatFileSize } from "@/renderer/utils";
+import { formatDate, formatFileSize } from '@/renderer/utils';
 ```
 
 ## Adding New Code

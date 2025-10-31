@@ -1,9 +1,9 @@
 /**
  * Electron API Type Definitions
- * 
+ *
  * Type definitions for the Electron API exposed to the renderer process
  * through the preload script.
- * 
+ *
  * @example
  * // In renderer process:
  * const api: ElectronAPI = window.electronAPI;

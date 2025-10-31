@@ -1,9 +1,9 @@
 /**
  * IPC Handlers
- * 
+ *
  * This file contains the main process IPC handlers that respond to
  * requests from the renderer process.
- * 
+ *
  * @example
  * // Register handlers in main.ts:
  * import { registerIPCHandlers } from './ipc/handlers';

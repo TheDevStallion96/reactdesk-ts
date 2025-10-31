@@ -21,13 +21,6 @@
     "allowSyntheticDefaultImports": true,
     "types": ["node"]
   },
-  "include": [
-    "src/main/**/*",
-    "src/shared/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "tests"
-  ]
+  "include": ["src/main/**/*", "src/shared/**/*"],
+  "exclude": ["node_modules", "dist", "tests"]
 }

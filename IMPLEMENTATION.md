@@ -9,7 +9,6 @@ This implementation provides a **production-ready, secure Electron application**
 ### Core Implementation Files
 
 1. **`src/main/main.ts`** (NEW)
-
    - Secure main process entry point
    - Comprehensive security configuration
    - IPC handlers with input validation
@@ -18,7 +17,6 @@ This implementation provides a **production-ready, secure Electron application**
    - Error handling and logging
 
 2. **`src/main/preload.ts`** (UPDATED)
-
    - Secure preload script using contextBridge
    - Input validation layer
    - Type-safe API exposure
@@ -26,7 +24,6 @@ This implementation provides a **production-ready, secure Electron application**
    - No direct exposure of Electron APIs
 
 3. **`src/shared/types.ts`** (UPDATED)
-
    - Shared TypeScript interfaces
    - Type definitions for IPC communication
    - Window API type declarations
@@ -40,7 +37,6 @@ This implementation provides a **production-ready, secure Electron application**
 ### Documentation Files
 
 5. **`SECURITY.md`** (NEW)
-
    - Complete security architecture explanation
    - Feature-by-feature breakdown
    - Best practices guide
@@ -48,7 +44,6 @@ This implementation provides a **production-ready, secure Electron application**
    - Compliance guidelines
 
 6. **`SECURITY_TESTING.md`** (NEW)
-
    - Attack scenario testing
    - Penetration testing guide
    - Incident response procedures
@@ -97,10 +92,10 @@ This implementation provides a **production-ready, secure Electron application**
 const result = await window.electronAPI.ping();
 
 // Preload
-ping: async () => ipcRenderer.invoke("ping");
+ping: async () => ipcRenderer.invoke('ping');
 
 // Main
-ipcMain.handle("ping", async () => "pong");
+ipcMain.handle('ping', async () => 'pong');
 ```
 
 ### 2. Data Processing with Validation
@@ -108,20 +103,20 @@ ipcMain.handle("ping", async () => "pong");
 ```typescript
 // Renderer
 const result = await window.electronAPI.processData({
-  text: "Hello",
+  text: 'Hello',
   count: 3,
 });
 
 // Preload validates
 processData: async (data) => {
   if (!validators.isValidString(data.text, 1000)) {
-    throw new Error("Invalid input");
+    throw new Error('Invalid input');
   }
-  return await ipcRenderer.invoke("process-data", data);
+  return await ipcRenderer.invoke('process-data', data);
 };
 
 // Main validates again
-ipcMain.handle("process-data", async (_event, data) => {
+ipcMain.handle('process-data', async (_event, data) => {
   // Validate structure and types
   // Process safely
   return result;
@@ -133,18 +128,18 @@ ipcMain.handle("process-data", async (_event, data) => {
 ```typescript
 // Renderer
 const result = await window.electronAPI.showOpenDialog({
-  properties: ["openFile"],
+  properties: ['openFile'],
 });
 const content = await window.electronAPI.readFile(result.filePaths[0]);
 
 // Preload
 showOpenDialog: async (options) => {
   // Validate options
-  return await ipcRenderer.invoke("show-open-dialog", options);
+  return await ipcRenderer.invoke('show-open-dialog', options);
 };
 
 // Main
-ipcMain.handle("show-open-dialog", async (_event, options) => {
+ipcMain.handle('show-open-dialog', async (_event, options) => {
   return await dialog.showOpenDialog(mainWindow, options);
 });
 ```
@@ -154,7 +149,7 @@ ipcMain.handle("show-open-dialog", async (_event, options) => {
 ```typescript
 // Renderer
 const unsubscribe = window.electronAPI.onNotification((message) => {
-  console.log("Notification:", message);
+  console.log('Notification:', message);
 });
 
 // Later: cleanup
@@ -163,14 +158,14 @@ unsubscribe();
 // Preload
 onNotification: (callback) => {
   const safeCallback = (_event, message) => {
-    if (typeof message === "string") callback(message);
+    if (typeof message === 'string') callback(message);
   };
-  ipcRenderer.on("notification", safeCallback);
-  return () => ipcRenderer.removeListener("notification", safeCallback);
+  ipcRenderer.on('notification', safeCallback);
+  return () => ipcRenderer.removeListener('notification', safeCallback);
 };
 
 // Main (can send)
-mainWindow.webContents.send("notification", "Hello from main!");
+mainWindow.webContents.send('notification', 'Hello from main!');
 ```
 
 ## Architecture Diagram

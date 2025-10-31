@@ -1,9 +1,9 @@
 /**
  * Home Page
- * 
+ *
  * The main landing page of the application.
  * Demonstrates basic IPC communication and component usage.
- * 
+ *
  * @example
  * import { HomePage } from '@/pages';
  * <HomePage />
@@ -27,15 +27,15 @@ export const HomePage: React.FC = () => {
     <div className="home-page">
       <h1>Welcome to ReactDesk</h1>
       <p>A modern Electron + React + TypeScript template</p>
-      
+
       {version && <p className="version">Version: {version}</p>}
-      
+
       <div className="actions">
         <Button variant="primary" onClick={handlePing}>
           Test IPC
         </Button>
       </div>
-      
+
       {message && <p className="message">{message}</p>}
     </div>
   );

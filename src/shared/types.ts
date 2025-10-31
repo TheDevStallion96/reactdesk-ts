@@ -58,15 +58,15 @@ export interface OpenDialogResult {
 export interface ElectronAPI {
   // System Information
   getAppVersion: () => Promise<AppVersionInfo>;
-  
+
   // IPC Communication
   ping: () => Promise<string>;
   processData: (data: ProcessDataInput) => Promise<ProcessDataOutput>;
-  
+
   // File Operations
   showOpenDialog: (options?: OpenDialogOptions) => Promise<OpenDialogResult>;
   readFile: (filePath: string) => Promise<string>;
-  
+
   // Event Listeners
   onNotification: (callback: (message: string) => void) => () => void;
 }

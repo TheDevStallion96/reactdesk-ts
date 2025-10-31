@@ -19,7 +19,7 @@ Utilities should be:
 ## Usage
 
 ```typescript
-import { formatDate, formatFileSize } from "@/renderer/utils";
+import { formatDate, formatFileSize } from '@/renderer/utils';
 
 const dateStr = formatDate(new Date());
 const sizeStr = formatFileSize(1024000);

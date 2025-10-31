@@ -1,9 +1,9 @@
 /**
  * Application Constants
- * 
+ *
  * Application-wide configuration values and constants.
  * These values are shared between main and renderer processes.
- * 
+ *
  * @example
  * import { APP_NAME, DEFAULT_WINDOW_SIZE } from '@/shared/constants/app';
  */

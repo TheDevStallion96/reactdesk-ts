@@ -5,9 +5,7 @@ import './styles/styles.css';
 import './styles/global.css';
 import './styles/components.css';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <React.StrictMode>

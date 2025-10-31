@@ -104,20 +104,35 @@ const App: React.FC = () => {
   return (
     <div className="app">
       <h1>🔒 Secure Electron + React</h1>
-      <p>
-        This is a secure Electron application with React 18+, Vite, and TypeScript.
-      </p>
+      <p>This is a secure Electron application with React 18+, Vite, and TypeScript.</p>
 
       {/* Version Information Section */}
-      <section style={{ marginTop: '2rem', padding: '1rem', border: '1px solid #ccc', borderRadius: '4px' }}>
+      <section
+        style={{
+          marginTop: '2rem',
+          padding: '1rem',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+        }}
+      >
         <h2>📋 Application Information</h2>
         {versionInfo ? (
           <ul style={{ listStyle: 'none', padding: 0 }}>
-            <li><strong>App Name:</strong> {versionInfo.name}</li>
-            <li><strong>Version:</strong> {versionInfo.version}</li>
-            <li><strong>Electron:</strong> {versionInfo.electronVersion}</li>
-            <li><strong>Chrome:</strong> {versionInfo.chromeVersion}</li>
-            <li><strong>Node:</strong> {versionInfo.nodeVersion}</li>
+            <li>
+              <strong>App Name:</strong> {versionInfo.name}
+            </li>
+            <li>
+              <strong>Version:</strong> {versionInfo.version}
+            </li>
+            <li>
+              <strong>Electron:</strong> {versionInfo.electronVersion}
+            </li>
+            <li>
+              <strong>Chrome:</strong> {versionInfo.chromeVersion}
+            </li>
+            <li>
+              <strong>Node:</strong> {versionInfo.nodeVersion}
+            </li>
           </ul>
         ) : (
           <p>Loading version info...</p>
@@ -125,9 +140,16 @@ const App: React.FC = () => {
       </section>
 
       {/* IPC Communication Examples */}
-      <section style={{ marginTop: '2rem', padding: '1rem', border: '1px solid #ccc', borderRadius: '4px' }}>
+      <section
+        style={{
+          marginTop: '2rem',
+          padding: '1rem',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+        }}
+      >
         <h2>🔌 IPC Communication Examples</h2>
-        
+
         <div style={{ marginBottom: '1rem' }}>
           <button onClick={handlePing}>Send Ping</button>
           {pingResult && <span style={{ marginLeft: '1rem' }}>Response: {pingResult}</span>}
@@ -144,25 +166,36 @@ const App: React.FC = () => {
       </section>
 
       {/* File Operations Section */}
-      <section style={{ marginTop: '2rem', padding: '1rem', border: '1px solid #ccc', borderRadius: '4px' }}>
+      <section
+        style={{
+          marginTop: '2rem',
+          padding: '1rem',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+        }}
+      >
         <h2>📁 File Operations</h2>
-        
+
         <div>
           <button onClick={handleOpenFile}>Open Text File</button>
           {selectedFile && (
             <div style={{ marginTop: '1rem' }}>
-              <p><strong>Selected File:</strong> {selectedFile}</p>
-              <div style={{ 
-                marginTop: '0.5rem', 
-                padding: '0.5rem', 
-                backgroundColor: '#f5f5f5', 
-                borderRadius: '4px',
-                maxHeight: '200px',
-                overflow: 'auto',
-                whiteSpace: 'pre-wrap',
-                fontFamily: 'monospace',
-                fontSize: '0.9rem'
-              }}>
+              <p>
+                <strong>Selected File:</strong> {selectedFile}
+              </p>
+              <div
+                style={{
+                  marginTop: '0.5rem',
+                  padding: '0.5rem',
+                  backgroundColor: '#f5f5f5',
+                  borderRadius: '4px',
+                  maxHeight: '200px',
+                  overflow: 'auto',
+                  whiteSpace: 'pre-wrap',
+                  fontFamily: 'monospace',
+                  fontSize: '0.9rem',
+                }}
+              >
                 {fileContent}
               </div>
             </div>
@@ -172,22 +205,31 @@ const App: React.FC = () => {
 
       {/* Notification Display */}
       {notification && (
-        <div style={{
-          position: 'fixed',
-          top: '20px',
-          right: '20px',
-          padding: '1rem',
-          backgroundColor: '#4CAF50',
-          color: 'white',
-          borderRadius: '4px',
-          boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
-        }}>
+        <div
+          style={{
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            padding: '1rem',
+            backgroundColor: '#4CAF50',
+            color: 'white',
+            borderRadius: '4px',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
+          }}
+        >
           📬 {notification}
         </div>
       )}
 
       {/* Security Information */}
-      <section style={{ marginTop: '2rem', padding: '1rem', backgroundColor: '#f0f8ff', borderRadius: '4px' }}>
+      <section
+        style={{
+          marginTop: '2rem',
+          padding: '1rem',
+          backgroundColor: '#f0f8ff',
+          borderRadius: '4px',
+        }}
+      >
         <h3>🔒 Security Features Enabled:</h3>
         <ul>
           <li>✅ Context Isolation</li>

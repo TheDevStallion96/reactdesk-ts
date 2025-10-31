@@ -104,9 +104,9 @@ webPreferences: {
 
 ```typescript
 // src/main/preload.ts
-contextBridge.exposeInMainWorld("electronAPI", {
+contextBridge.exposeInMainWorld('electronAPI', {
   // Only expose specific, safe functions
-  ping: async () => ipcRenderer.invoke("ping"),
+  ping: async () => ipcRenderer.invoke('ping'),
   // Never expose: ipcRenderer, require, or Node.js modules
 });
 ```
@@ -121,18 +121,14 @@ contextBridge.exposeInMainWorld("electronAPI", {
 
 ```typescript
 // src/main/main.ts
-mainWindow.webContents.session.webRequest.onHeadersReceived(
-  (details, callback) => {
-    callback({
-      responseHeaders: {
-        ...details.responseHeaders,
-        "Content-Security-Policy": [
-          "default-src 'self'; script-src 'self'; ...",
-        ],
-      },
-    });
-  }
-);
+mainWindow.webContents.session.webRequest.onHeadersReceived((details, callback) => {
+  callback({
+    responseHeaders: {
+      ...details.responseHeaders,
+      'Content-Security-Policy': ["default-src 'self'; script-src 'self'; ..."],
+    },
+  });
+});
 ```
 
 ### 6. Navigation Protection (✅ Implemented)
@@ -145,7 +141,7 @@ mainWindow.webContents.session.webRequest.onHeadersReceived(
 
 ```typescript
 // src/main/main.ts
-mainWindow.webContents.on("will-navigate", (event, navigationUrl) => {
+mainWindow.webContents.on('will-navigate', (event, navigationUrl) => {
   // Block navigation to external URLs
   event.preventDefault();
 });
@@ -162,10 +158,10 @@ mainWindow.webContents.on("will-navigate", (event, navigationUrl) => {
 ```typescript
 // src/main/main.ts
 mainWindow.webContents.setWindowOpenHandler(({ url }) => {
-  if (url.startsWith("https://")) {
+  if (url.startsWith('https://')) {
     shell.openExternal(url); // Open in browser, not in app
   }
-  return { action: "deny" };
+  return { action: 'deny' };
 });
 ```
 
@@ -182,16 +178,16 @@ mainWindow.webContents.setWindowOpenHandler(({ url }) => {
 processData: async (data: ProcessDataInput) => {
   // Validate before sending to main
   if (!validators.isValidString(data.text, 1000)) {
-    throw new Error("Invalid text field");
+    throw new Error('Invalid text field');
   }
-  return await ipcRenderer.invoke("process-data", data);
+  return await ipcRenderer.invoke('process-data', data);
 };
 
 // src/main/main.ts
-ipcMain.handle("process-data", async (_event, data: unknown) => {
+ipcMain.handle('process-data', async (_event, data: unknown) => {
   // Validate again in main process
-  if (typeof data !== "object" || data === null) {
-    throw new Error("Invalid data format");
+  if (typeof data !== 'object' || data === null) {
+    throw new Error('Invalid data format');
   }
   // ... more validation
 });
@@ -208,7 +204,7 @@ ipcMain.handle("process-data", async (_event, data: unknown) => {
 ```typescript
 // src/main/main.ts
 global.eval = function () {
-  throw new Error("eval() is disabled for security reasons");
+  throw new Error('eval() is disabled for security reasons');
 };
 ```
 
@@ -248,17 +244,17 @@ const content = await window.electronAPI.readFile(filePath);
 // 2. Preload validates
 readFile: async (filePath: string) => {
   if (!validators.isValidPath(filePath)) {
-    throw new Error("Invalid file path");
+    throw new Error('Invalid file path');
   }
-  return await ipcRenderer.invoke("read-file", filePath);
+  return await ipcRenderer.invoke('read-file', filePath);
 };
 
 // 3. Main validates and executes
-ipcMain.handle("read-file", async (_event, filePath: string) => {
-  if (filePath.includes("..")) {
-    throw new Error("Invalid file path");
+ipcMain.handle('read-file', async (_event, filePath: string) => {
+  if (filePath.includes('..')) {
+    throw new Error('Invalid file path');
   }
-  return await fs.promises.readFile(filePath, "utf-8");
+  return await fs.promises.readFile(filePath, 'utf-8');
 });
 ```
 

@@ -12,10 +12,10 @@ Constants are organized by category:
 ## Usage
 
 ```typescript
-import { APP_NAME, IPC_CHANNELS } from "@/shared/constants";
+import { APP_NAME, IPC_CHANNELS } from '@/shared/constants';
 
 console.log(APP_NAME);
-ipcMain.handle(IPC_CHANNELS.APP_PING, () => "pong");
+ipcMain.handle(IPC_CHANNELS.APP_PING, () => 'pong');
 ```
 
 ## Benefits

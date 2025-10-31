@@ -1,15 +1,15 @@
 /**
  * useIPC Hook
- * 
+ *
  * A React hook for safely calling IPC methods exposed via the preload script.
  * Provides type-safe access to Electron IPC functionality.
- * 
+ *
  * @example
  * const { invoke, on, off } = useIPC();
- * 
+ *
  * // Call an IPC handler
  * const result = await invoke('app:ping');
- * 
+ *
  * // Listen to IPC events
  * useEffect(() => {
  *   const handler = (data) => console.log(data);
@@ -20,6 +20,7 @@
 
 import { useCallback } from 'react';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function useIPC() {
   const electronAPI = (window as any).electronAPI;
 
@@ -58,3 +59,4 @@ export function useIPC() {
 
   return { invoke, on, off };
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */

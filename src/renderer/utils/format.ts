@@ -1,8 +1,8 @@
 /**
  * Format Utilities
- * 
+ *
  * Helper functions for formatting data for display.
- * 
+ *
  * @example
  * import { formatDate, formatFileSize } from '@/utils/format';
  * const dateStr = formatDate(new Date());
