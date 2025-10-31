@@ -2,7 +2,7 @@
   "name": "reactdesk-ts",
   "version": "1.0.0",
   "description": "Electron application with TypeScript and React",
-  "main": "dist/main/index.js",
+  "main": "dist/main/main.js",
   "scripts": {
     "dev": "npm run build:main && concurrently \"npm run dev:vite\" \"npm run dev:electron\"",
     "dev:vite": "vite",
