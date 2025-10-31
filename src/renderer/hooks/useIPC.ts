@@ -18,7 +18,7 @@
  * }, []);
  */
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback } from 'react';
 
 export function useIPC() {
   const electronAPI = (window as any).electronAPI;

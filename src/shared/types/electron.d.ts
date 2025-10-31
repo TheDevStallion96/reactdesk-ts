@@ -9,34 +9,14 @@
  * const api: ElectronAPI = window.electronAPI;
  */
 
-/**
- * Electron API interface exposed via preload script
+/*
+ * This file augments the global Window interface to expose the Electron API
+ * defined in `src/shared/types.ts`. We import the typed `ElectronAPI` from
+ * that module and assign it to `window.electronAPI` so renderer code gets
+ * the detailed, secure API shape used across the project.
  */
-export interface ElectronAPI {
-  /**
-   * Invoke an IPC handler in the main process
-   */
-  invoke: (channel: string, ...args: any[]) => Promise<any>;
+import type { ElectronAPI } from '../types';
 
-  /**
-   * Listen to IPC events from the main process
-   */
-  on: (channel: string, callback: (...args: any[]) => void) => void;
-
-  /**
-   * Remove an IPC event listener
-   */
-  off: (channel: string, callback: (...args: any[]) => void) => void;
-
-  /**
-   * Send a message to the main process (one-way)
-   */
-  send: (channel: string, ...args: any[]) => void;
-}
-
-/**
- * Extend the Window interface to include the Electron API
- */
 declare global {
   interface Window {
     electronAPI: ElectronAPI;
